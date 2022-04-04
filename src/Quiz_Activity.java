@@ -33,13 +33,13 @@ int answer,score;
                             answer = a * b;
 				questionLabel.setText(a + " x " + b + " = ");
 			} else if (i==3){ // division
-				if (true) { // since we only focus on integers, round off if 
+				if (a >= b) { // since we only focus on integers, round off if 
 					// c is a decimal number
-					
+					answer = Math.round(a/b);
 					questionLabel.setText(a + " / " + b + " = ");
 				} else { // because we cannot divide a by 0
-					
-					questionLabel.setText(a + " / " + b + " = ");
+					answer = Math.round(b/a);
+					questionLabel.setText(b + " / " + a + " = ");
 				}
 			}
                 scoreLabel.setText("" + score);
@@ -120,13 +120,10 @@ int answer,score;
 
     private void answerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_answerButtonMouseClicked
         // TODO add your handling code here:
-        if(Integer.parseInt(answerTextfield.getText()) == answer){
-            questionLabel.setText("Benar");
+        if(Math.round(Integer.parseInt(answerTextfield.getText())) == Math.round(answer)){
             score += 1;
             question();
         }else{
-            questionLabel.setText("Salah");
-            score += 0;
             question();
         }
         answerTextfield.setText("");
