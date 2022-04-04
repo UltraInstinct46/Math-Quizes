@@ -27,10 +27,10 @@ int answer,score;
                     answer = a + b;
 				questionLabel.setText(a + " + " + b + " = ");
 			} else if (i== 1){ // subtraction
-				
+                            answer = a - b;
 				questionLabel.setText(a + " - " + b + " = ");
 			} else if (i == 2) { // multiplication
-				
+                            answer = a * b;
 				questionLabel.setText(a + " x " + b + " = ");
 			} else if (i==3){ // division
 				if (true) { // since we only focus on integers, round off if 
@@ -126,8 +126,10 @@ int answer,score;
             question();
         }else{
             questionLabel.setText("Salah");
+            score += 0;
             question();
         }
+        answerTextfield.setText("");
     }//GEN-LAST:event_answerButtonMouseClicked
 
     /**
