@@ -7,15 +7,43 @@
  *
  * @author killua
  */
+import java.util.*;
 public class Quiz_Activity extends javax.swing.JFrame {
-
+int answer,score;
     /**
      * Creates new form Quiz_Activity
      */
     public Quiz_Activity() {
         initComponents();
     }
-
+    public void question(){
+                int i,a,b;
+                Random randomOperator = new Random();
+                Random randomNumber = new Random();
+                i = randomOperator.nextInt(4);
+                a = randomNumber.nextInt(11);
+                b = randomNumber.nextInt(11);
+                if(i == 0) { // addition
+                    answer = a + b;
+				questionLabel.setText(a + " + " + b + " = ");
+			} else if (i== 1){ // subtraction
+				
+				questionLabel.setText(a + " - " + b + " = ");
+			} else if (i == 2) { // multiplication
+				
+				questionLabel.setText(a + " x " + b + " = ");
+			} else if (i==3){ // division
+				if (true) { // since we only focus on integers, round off if 
+					// c is a decimal number
+					
+					questionLabel.setText(a + " / " + b + " = ");
+				} else { // because we cannot divide a by 0
+					
+					questionLabel.setText(a + " / " + b + " = ");
+				}
+			}
+                scoreLabel.setText("" + score);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,21 +53,82 @@ public class Quiz_Activity extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        questionLabel = new javax.swing.JLabel();
+        answerTextfield = new javax.swing.JTextField();
+        answerButton = new javax.swing.JButton();
+        scoreLabel = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+
+        questionLabel.setText("1 + 1 = ");
+
+        answerButton.setText("Submit");
+        answerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                answerButtonMouseClicked(evt);
+            }
+        });
+
+        scoreLabel.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scoreLabel)
+                .addGap(184, 184, 184))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(answerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(answerTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scoreLabel))
+                .addGap(41, 41, 41)
+                .addComponent(answerTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(answerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        question();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void answerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_answerButtonMouseClicked
+        // TODO add your handling code here:
+        if(Integer.parseInt(answerTextfield.getText()) == answer){
+            questionLabel.setText("Benar");
+            score += 1;
+            question();
+        }else{
+            questionLabel.setText("Salah");
+            question();
+        }
+    }//GEN-LAST:event_answerButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -77,5 +166,9 @@ public class Quiz_Activity extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton answerButton;
+    private javax.swing.JTextField answerTextfield;
+    private javax.swing.JLabel questionLabel;
+    private javax.swing.JLabel scoreLabel;
     // End of variables declaration//GEN-END:variables
 }
